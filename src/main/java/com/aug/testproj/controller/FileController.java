@@ -21,11 +21,13 @@ public class FileController {
         this.fileService = fileService;
     }
 
+    //Пользователь вводит файл и данный ему хеш
     @PostMapping("/file")
     @ApiOperation(value = "check file checksum", response = ResponseModel.class)
     public ResponseEntity<ResponseModel> handleFileUpload(@RequestParam("file") MultipartFile file,
                                                           @RequestParam("checksum") String checksum) throws NoSuchAlgorithmException {
         ResponseEntity.ok(HttpStatus.OK);
+        //responseEntity вернет: пользовательский хеш, посчитанный хеш и бул значение после сравнения
         return ResponseEntity.ok(new ResponseModel(checksum,
                 fileService.calculateChecksum(file),
                 fileService.compareChecksum(checksum, fileService.calculateChecksum(file))));

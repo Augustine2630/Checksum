@@ -9,8 +9,10 @@ import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.provisioning.InMemoryUserDetailsManager;
 
+
 @EnableWebSecurity
 public class SecurityConfig extends WebSecurityConfigurerAdapter {
+
     @Override
     protected void configure(HttpSecurity http) throws Exception {
         // конфигурируем сам Spring Security
@@ -18,11 +20,11 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
         http.csrf().disable().authorizeRequests()
                 .antMatchers("/auth/login").permitAll()
                 .anyRequest().authenticated()
-//                .anyRequest().permitAll()
                 .and()
                 .formLogin().loginPage("/auth/login")
                 .loginProcessingUrl("/process_login")
                 .defaultSuccessUrl("/swagger-ui.html", true)
+                //Красные буквы при неправильных credentials
                 .failureUrl("/auth/login?error")
                 .and()
                 .logout()
@@ -32,7 +34,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
     @Bean
     public UserDetailsService users() {
-        //аутентификация по памяти
+        //Аутентификация по памяти
         User.UserBuilder users = User.withDefaultPasswordEncoder();
         UserDetails user = users
                 .username("user")
