@@ -10,7 +10,7 @@ import java.security.NoSuchAlgorithmException;
 @Service
 public class FileService {
 
-    public Boolean compareChecksum(String calculatedChecksum, String preparedChecksum){
+    public Boolean compareChecksum(String calculatedChecksum, String preparedChecksum) {
         return (calculatedChecksum).matches(preparedChecksum.toLowerCase());
     }
 
@@ -25,8 +25,7 @@ public class FileService {
         return checksum;
     }
 
-    private static String getFileChecksum(MessageDigest digest, MultipartFile file)
-    {
+    private static String getFileChecksum(MessageDigest digest, MultipartFile file) {
         //Получение файла в стрим
         try {
             FileInputStream fis = new FileInputStream(convert(file));
@@ -48,8 +47,7 @@ public class FileService {
             //bytes[] содержит байты в десятичном формате;
             //Преобразование в шестнадцатеричный формат
             StringBuilder sb = new StringBuilder();
-            for(int i=0; i< bytes.length ;i++)
-            {
+            for (int i = 0; i < bytes.length; i++) {
                 sb.append(Integer.toString((bytes[i] & 0xff) + 0x100, 16).substring(1));
             }
 
