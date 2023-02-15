@@ -11,6 +11,7 @@ import org.springframework.web.multipart.MultipartFile;
 
 import java.security.NoSuchAlgorithmException;
 
+//jwt
 @RestController
 public class FileController {
 
